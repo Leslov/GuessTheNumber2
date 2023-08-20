@@ -5,18 +5,34 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:local="clr-namespace:FrontWpf.Views"
+	xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     mc:Ignorable="d" 
     d:DesignHeight="450" 
 	d:DesignWidth="300">
-	<DockPanel Margin="16" Background="LightSlateGray">
-		<TextBox
+	<DockPanel Background="LightSlateGray">
+		<DockPanel 
+			x:Name="input"
 			DockPanel.Dock="Bottom" 
-			Background="LightGreen"
-			Margin="0,8"
-			FontSize="28"
-			Text="{Binding UserGuess}"
-			MaxLines="1"
-			MaxLength="4"/>
-		<ListBox Background="LightYellow"/>
+			Background="LightYellow">
+			<Button 
+				Command="{Binding GuessCommand}"
+				DockPanel.Dock="Right">
+			</Button>
+			<TextBox
+				DockPanel.Dock="Bottom" 
+				Background="LightGreen"
+				Margin="0,8"
+				FontSize="28"
+				Text="{Binding UserGuess, UpdateSourceTrigger=PropertyChanged}"
+				MaxLines="1"
+				MaxLength="4">
+				<TextBox.InputBindings>
+					<KeyBinding Command="{Binding GuessCommand}" Key="Enter" />
+				</TextBox.InputBindings>
+			</TextBox>
+		</DockPanel>
+	
+		<UniformGrid x:Name="history" Columns="3">
+		</UniformGrid>
 	</DockPanel>
 </UserControl>
