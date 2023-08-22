@@ -5,6 +5,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:local="clr-namespace:FrontWpf.Views"
+	xmlns:myext="clr-namespace:FrontWpf.MyExtensions"
 	xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     mc:Ignorable="d" 
     d:DesignHeight="450" 
@@ -31,8 +32,40 @@
 				</TextBox.InputBindings>
 			</TextBox>
 		</DockPanel>
-	
-		<UniformGrid x:Name="history" Columns="3">
-		</UniformGrid>
+		<ScrollViewer
+			HorizontalScrollBarVisibility="Disabled"
+			VerticalScrollBarVisibility="Auto"
+			myext:ScrollViewerExtensions.AlwaysScrollToEnd="True">
+			<StackPanel>
+				<ItemsControl ItemsSource="{Binding History}">
+					<ItemsControl.ItemTemplate>
+						<DataTemplate>
+							<UniformGrid x:Name="history" Columns="2">
+								<TextBlock 
+									Grid.Column="0" 
+									FontSize="28"
+									Text="{Binding FullNumber}"
+									d:Text="1234"
+									HorizontalAlignment="Center"/>
+								<StackPanel
+									Grid.Column="1" 
+									Orientation="Horizontal"
+									HorizontalAlignment="Center">
+									<TextBlock 
+										FontSize="28"
+										Text="{Binding NonExactCount}"
+										d:Text="2"/>
+									<TextBlock FontSize="28" Text="-"/>
+									<TextBlock 
+										FontSize="28"
+										Text="{Binding ExactCount}"
+										d:Text="1"/>
+								</StackPanel>
+							</UniformGrid>
+						</DataTemplate>
+					</ItemsControl.ItemTemplate>
+				</ItemsControl>
+			</StackPanel>
+		</ScrollViewer>
 	</DockPanel>
 </UserControl>

@@ -1,7 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Business;
+using Utilities;
 
 namespace FrontWpf.ViewModels
 {
@@ -32,11 +35,12 @@ namespace FrontWpf.ViewModels
 			}
 		}
 
-		private List<GuessResult> History { get; } = new List<GuessResult>();
+		public ObservableCollection<GuessResult> History { get; } = new ObservableCollection<GuessResult>();
 
 		private void OnGuess()
 		{
 			History.Add(new GuessResult(_userGuessShort, 2, 1));
+			UserGuess = string.Empty;
 		}
 	}
 }

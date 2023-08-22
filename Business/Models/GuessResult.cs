@@ -1,8 +1,15 @@
 ﻿using System;
 
-namespace FrontWpf
+namespace Business
 {
-	public class GuessResult
+	public interface IGuessResult
+	{
+		byte ExactCount { get; }
+		ushort FullNumber { get; }
+		byte NonExactCount { get; }
+	}
+
+	public struct GuessResult : IGuessResult
 	{
 		public GuessResult(ushort fullNumber, byte nonExactCount, byte exactCount)
 		{
@@ -22,6 +29,6 @@ namespace FrontWpf
 		public byte NonExactCount { get; }
 		public byte ExactCount { get; }
 
-		public override string ToString() => $"{FullNumber}: {NonExactCount}-{ExactCount}";
+		public override string ToString() => $"{FullNumber}: {NonExactCount}-{ExactCount}";//Only for debug purposes
 	}
 }
